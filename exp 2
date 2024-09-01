@@ -1,0 +1,17 @@
+import pandas as pd
+
+# Load the Iris dataset
+data = pd.read_csv('iris.csv')
+
+# Print the first 10 records
+print("First 10 Records:\n", data.head(10))
+
+# Total number of rows and columns
+print("\nTotal Number of Rows:", data.shape[0])
+print("Total Number of Columns:", data.shape[1])
+
+# Column names
+print("\nColumn Names:\n", data.columns)
+
+# Mean of all attributes
+print("\nMean of all Attributes:\n", data.mean())
