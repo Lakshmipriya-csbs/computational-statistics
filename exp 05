@@ -1,0 +1,27 @@
+mport numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import minimize
+from sklearn.linear_model import LinearRegression
+np.random.seed(0)  # For reproducibility
+X = np.random.uniform(10, 30, 100)
+e = np.random.normal(0, 1, 100)  # Generate random errors
+Y = 10 + 4 * X + e
+import pandas as pd
+df = pd.DataFrame({'X': X, 'Y': Y})
+import seaborn as sns
+sns.regplot(x='X', y='Y', data=df)
+plt.show()
+ols = LinearRegression()
+ols.fit(df[['X']], df['Y'])
+residuals = Y - ols.predict(df[['X']])
+sd_residuals = np.std(residuals)
+def log_likelihood(params):
+    beta0, beta1, sigma = params
+    mu = beta0 + beta1 * X
+    return -np.sum(np.log(np.sqrt(2 * np.pi * sigma**2)) + (Y - mu)**2 / (2 * sigma**2))
+result = minimize(log_likelihood, [0, 0, 1], method='L-BFGS-B')
+print("MLE Parameters:")
+print(result.x)
+print("\nOLS Parameters:")
+print(ols.intercept_)
+print(ols.coef_)
