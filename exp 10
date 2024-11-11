@@ -1,0 +1,10 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+np.random.seed(0)
+data = np.random.rand(200, 2)
+kmeans = KMeans(n_clusters=3)
+kmeans.fit(data)
+plt.scatter(data[:, 0], data[:, 1], c=kmeans.labels_)
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], marker='*', s=200, c='red')
+plt.show()
