@@ -1,0 +1,23 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+# Sample data
+data = {
+    'Attribute 1': [10, 20, 30, 40, 50],
+    'Attribute 2': [5, 10, 15, 20, 25],
+    'Attribute 3': [2, 4, 6, 8, 10],
+}
+# Create a Pandas DataFrame
+df = pd.DataFrame(data)
+# Plot the Horizontal Bar Chart
+plt.figure(figsize=(10, 6))
+plt.barh(df.index, df['Attribute 1'], color='skyblue', label='Attribute 1')
+plt.barh(df.index, df['Attribute 2'], color='coral', left=df['Attribute 1'], label='Attribute 2')
+plt.barh(df.index, df['Attribute 3'], color='palegreen', left=df['Attribute 1'] + df['Attribute 2'], label='Attribute 3')
+# Set labels and title
+plt.xlabel('Values')
+plt.ylabel('Data Points')
+plt.title('H-Plot for given data set')
+# Add legend
+plt.legend()
+# Display the plot
+plt.show()
